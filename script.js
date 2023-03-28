@@ -113,15 +113,51 @@ const gameboard= function (){
         printBoard();
     }
 
+    let checkWinner = function(){
+        let winner=" "
+        //checking columns
+        if ((line1[0]==line2[0])&&(line2[0]==line3[0]))
+            { winner=line1[0];}
+        else if ((line1[1]==line2[1])&&(line2[1]==line3[1]))
+            { winner=line1[1];}    
+        else if ((line1[2]==line2[2])&&(line2[2]==line3[2]))
+            { winner=line1[2];}  
+        //check rows          
+        else if ((line1[0]==line1[1])&&(line1[2]==line1[1]))
+            { winner=line1[0];}
+        else if ((line2[0]==line2[1])&&(line2[1]==line2[2]))
+            { winner=line2[1];}    
+        else if ((line3[0]==line3[1])&&(line3[2]==line3[1]))
+            { winner=line3[2];}  
+        
+            if(winner!=" "){
+                console.log(winner)
+                const winElement=document.createElement("div");
+                const winElementInter=document.createElement("h1");
+                winElementInter.style.cssText='display:flex; flex-direction:row;justify-content=center;text-align:center;color:red !important;';
+                winElementInter.textContent="The Winner is "+winner;
+                winElement.style.cssText='display:flex; flex-direction:row;justify-content=center;text-align:center;color:red !important;font-size: 58px !important;';
+                winElement.appendChild(winElementInter);
+                let elementLocal=document.getElementById("Winner");
+                elementLocal.appendChild(winElement)
+                let containerLocal=document.getElementById("container");
+                containerLocal.innerHTML="";
+                
+            }
+        return;
+    }
+
     return {
         line1,
         line2,
         line3,
         setValue,
         printBoard,
-        resetBoard
+        resetBoard,
+        checkWinner
     }
 }
+
 let myGame= gameboard();
 let myControl= turnController();
 
@@ -134,62 +170,55 @@ const reset = function(){
     myGame.printBoard();
     myControl.resetControl();
     myControl.printControl();
+    let elementLocal=document.getElementById("Winner");
+    elementLocal.innerHTML="";
 }
 
 /**
- * 
+ * each control uses this function
  */
 const buttonFun = function(x){
     
     let localId=x.srcElement.id;
     let user= myControl.getCurrentTurn();
-    myControl.setCurrentTurn();
-    console.log("turn:"+user)
+    myControl.setCurrentTurn();    
     if(localId==='button_0')
-    {
-        console.log(0);
+    {        
         myGame.setValue(0,0,user)
     }
     if(localId==='button_1')
-    {
-        console.log(1);
+    {     
         myGame.setValue(1,0,user)
     }
     if(localId==='button_2')
     {
-        console.log(2);
         myGame.setValue(2,0,user)
     }
     if(localId==='button_3')
     {
-        console.log(3);
         myGame.setValue(0,1,user)
     }
     if(localId==='button_4')
     {
-        console.log(4);
         myGame.setValue(1,1,user)
     }
     if(localId==='button_5')
     {
-        console.log(5);
         myGame.setValue(2,1,user)
     }
     if(localId==='button_6')
     {
-        console.log(6);
         myGame.setValue(0,2,user)
     }
     if(localId==='button_7')
     {
-        console.log(7);
         myGame.setValue(1,2,user)
     }
     if(localId==='button_8')
     {
-        console.log(8);
         myGame.setValue(2,2,user)
     }
+    myGame.checkWinner();
     myControl.printControl();
     return;
 }
