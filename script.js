@@ -2,9 +2,10 @@ console.log("starting")
 
 
 
-const turnController= function(){    
+const turnController= function(){
+    let players=['X','O'] //type of marks
     let current_turn='X'; // inital mark
-    let countMov = 0;// right movements counter
+    let countMov = 0;
     let setCurrentTurn = function(){
         
         if (this.current_turn==='X'){
