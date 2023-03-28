@@ -5,19 +5,80 @@
 }
 
 body{
+    display:grid;
+    grid-template-columns: 100%;
+    grid-template-rows: auto;
+}
+
+#turnController{
+    display:flex;    
+    flex-direction: row;
+    width: 100%;
+    height: 200px;
+    background: transparent;
+    text-align: center;
+}
+#rightC{
+    display: flex;
+    resize: both;
+    width: 40%;
+    background: transparent;
+}
+#leftC{
+    display: flex;
+    resize: both;
+    width: 40%;
+    background: transparent;
+}
+.contentControl{
     display:flex;
     flex-direction: column;
+    justify-content: auto;
+    font-size: 35px;
+    width: 20%;
+    text-align: center;
+    align-items: center;
 }
+#textControl{
+    display:flex;
+    flex-direction: column;
+    justify-content: space-around;
+    font-size: 35px;
+    font-weight: bold;
+    width: 100%;
+    text-align: center;
+    background: gold;
+    color: black;
+}
+#buttonControl{
+    display:flex;    
+    flex-direction: row;
+    justify-content: center;
+    font-size: 35px;
+    width: 100%;
+    text-align: center;
+    background: gold;
+}
+
+#buttonReset{
+    display:flex;
+    justify-content: center;
+    width: 100px;
+    height: 50px;
+    font-size: 25px !important;
+}
+
 
 #container{
     display:flex;
     flex-direction: row;
     justify-content: center;
+    align-items: center;
+    text-align: center;
    
 }
 .insideGrid{
-    display: flex;
-    resize: both;
+    display: grid;    
     width: 100%;
     height: 100%;
     
@@ -30,22 +91,21 @@ button{
     background: rgb(190, 190, 190);
     border-radius: 15px;
     box-shadow: 2px 2px 10px 0px red;
-    font-size: larger;
+    font-size: 85px;
     font-weight: bold;
     color:black;
     text-align: center;
     justify-content: center;
-}
+    }
 ul{
     display: grid;
-    resize: both;
-    width: auto;
+    resize: both;    
     grid-template-columns: 120px 120px 120px;
     grid-template-rows: 120px 120px 120px;
-    grid-row-gap : 5%;
-    grid-column-gap : 5%;
-    
-    
+        
+    text-align: none !important;
+    padding-left: 0%;
+    padding-top: 0% ;
 }
 li{
     display:grid;
@@ -53,9 +113,10 @@ li{
     background: white;
     border-radius: 15px;
 }
-.content{
-    display:flex;
-    justify-content: center;
-    height: 800px;
-    width: 800px; 
+.content2{
+    display:grid;    
+    resize: both;        
+    grid-template-columns: 100%;
+    grid-template-rows: 100%;
+    
 }
