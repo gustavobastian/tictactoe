@@ -174,7 +174,7 @@ const gameboard= function (){
             text="The Winner is "+winner;
         }
         console.log(myControl.getCountMov())
-        if(myControl.getCountMov()==8)
+        if(myControl.getCountMov()==8 && winner==" ")
         {
             text="No more movements, tie!";
             winner="1";
