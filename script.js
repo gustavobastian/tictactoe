@@ -2,10 +2,9 @@ console.log("starting")
 
 
 
-const turnController= function(){
-    let players=['X','O']
-    let current_turn='X';
-    let countMov = 0;
+const turnController= function(){    
+    let current_turn='X'; // inital mark
+    let countMov = 0;// right movements counter
     let setCurrentTurn = function(){
         
         if (this.current_turn==='X'){
@@ -162,7 +161,7 @@ const gameboard= function (){
             { winner=line2[1];}    
         else if ((line3[0]==line3[1])&&(line3[2]==line3[1]))
             { winner=line3[2];}  
-        
+        //check diagonal
         else if ((line1[0]==line2[1])&&(line2[1]==line3[2]))
             { winner=line1[0];}  
         else if ((line1[2]==line2[1])&&(line2[1]==line3[0]))
@@ -179,7 +178,7 @@ const gameboard= function (){
             text="No more movements, tie!";
             winner="1";
         }
-
+        //printing winner or tie message
         if(winner!=" "){
                 console.log(winner)
                 const winElement=document.createElement("div");
@@ -226,7 +225,7 @@ const reset = function(){
 }
 
 /**
- * each control uses this function
+ * buttons event handling
  */
 const buttonFun = function(x){
     let occupied =0;
