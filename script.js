@@ -6,7 +6,7 @@ const turnController= function(){
     let players=['X','O']
     let current_turn='X';
 
-    let setCurrentTurn= function(){
+    let setCurrentTurn = function(){
         
         if (this.current_turn==='X'){
             this.current_turn='O';
@@ -14,6 +14,7 @@ const turnController= function(){
         else{
             this.current_turn='X';
         }
+        return;
     }
 
     let getCurrentTurn=function(){
@@ -31,6 +32,11 @@ const turnController= function(){
 
         let resetLocal=document.getElementById("buttonReset");        
         resetLocal.addEventListener('click',reset);
+        return;
+    }
+
+    let resetControl = function(){
+        this.current_turn='X';
     }
 
     return {
@@ -38,7 +44,8 @@ const turnController= function(){
         current_turn,
         setCurrentTurn,
         getCurrentTurn,
-        printControl
+        printControl,
+        resetControl
     }
 }
 
@@ -125,6 +132,8 @@ const reset = function(){
     console.log("reseting");
     myGame.resetBoard();
     myGame.printBoard();
+    myControl.resetControl();
+    myControl.printControl();
 }
 
 /**
@@ -181,6 +190,7 @@ const buttonFun = function(x){
         console.log(8);
         myGame.setValue(2,2,user)
     }
+    myControl.printControl();
     return;
 }
 

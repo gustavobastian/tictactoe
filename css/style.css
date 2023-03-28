@@ -17,6 +17,7 @@ body{
     height: 200px;
     background: transparent;
     text-align: center;
+    
 }
 #rightC{
     display: flex;
@@ -38,6 +39,8 @@ body{
     width: 20%;
     text-align: center;
     align-items: center;
+    
+    
 }
 #textControl{
     display:flex;
@@ -49,6 +52,7 @@ body{
     text-align: center;
     background: gold;
     color: black;
+    
 }
 #buttonControl{
     display:flex;    
