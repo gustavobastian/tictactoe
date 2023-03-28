@@ -1,15 +1,18 @@
 console.log("starting")
 
+
+
 const turnController= function(){
     let players=['X','O']
     let current_turn='X';
 
     let setCurrentTurn= function(){
-        if (current_turn=='X'){
-            current_turn='O';
+        
+        if (this.current_turn==='X'){
+            this.current_turn='O';
         }
         else{
-            current_turn='X';
+            this.current_turn='X';
         }
     }
 
@@ -26,15 +29,19 @@ const turnController= function(){
 
         elementLocal.innerHTML=content;
 
+        let resetLocal=document.getElementById("buttonReset");        
+        resetLocal.addEventListener('click',reset);
     }
 
     return {
         players,
         current_turn,
         setCurrentTurn,
+        getCurrentTurn,
         printControl
     }
 }
+
 const gameboard= function (){
     let line1=new Array(3).fill(' ');
     let line2=new Array(3).fill(' ');
@@ -70,6 +77,7 @@ const gameboard= function (){
         buttons_values.push(line3[1]);
         buttons_values.push(line3[2]);
 
+        //generating buttons on the screen
         let content="<div class='content2'>";
 
         content+="<ul>";
@@ -82,12 +90,19 @@ const gameboard= function (){
         content+="</div>";
 
         elementLocal.innerHTML=content;
+        //adding listeners
+        for (let d=0;d<9;d++)
+        {
+            let component=document.getElementById("button_"+d);
+            component.addEventListener("click",buttonFun);
+        }
+
     }
 
-    let resetBoard= function(){
-        this.line1=new Array(3).fill(' ');
-        this.line2=new Array(3).fill(' ');
-        this.line3=new Array(3).fill(' ');
+    let resetBoard = function(){
+        line1=new Array(3).fill(' ');
+        line2=new Array(3).fill(' ');
+        line3=new Array(3).fill(' ');
         printBoard();
     }
 
@@ -100,12 +115,74 @@ const gameboard= function (){
         resetBoard
     }
 }
-
 let myGame= gameboard();
 let myControl= turnController();
+
+/**
+ * cleaning board function
+ */
+const reset = function(){
+    console.log("reseting");
+    myGame.resetBoard();
+    myGame.printBoard();
+}
+
+/**
+ * 
+ */
+const buttonFun = function(x){
+    
+    let localId=x.srcElement.id;
+    let user= myControl.getCurrentTurn();
+    myControl.setCurrentTurn();
+    console.log("turn:"+user)
+    if(localId==='button_0')
+    {
+        console.log(0);
+        myGame.setValue(0,0,user)
+    }
+    if(localId==='button_1')
+    {
+        console.log(1);
+        myGame.setValue(1,0,user)
+    }
+    if(localId==='button_2')
+    {
+        console.log(2);
+        myGame.setValue(2,0,user)
+    }
+    if(localId==='button_3')
+    {
+        console.log(3);
+        myGame.setValue(0,1,user)
+    }
+    if(localId==='button_4')
+    {
+        console.log(4);
+        myGame.setValue(1,1,user)
+    }
+    if(localId==='button_5')
+    {
+        console.log(5);
+        myGame.setValue(2,1,user)
+    }
+    if(localId==='button_6')
+    {
+        console.log(6);
+        myGame.setValue(0,2,user)
+    }
+    if(localId==='button_7')
+    {
+        console.log(7);
+        myGame.setValue(1,2,user)
+    }
+    if(localId==='button_8')
+    {
+        console.log(8);
+        myGame.setValue(2,2,user)
+    }
+    return;
+}
+
 myControl.printControl();
-myGame.printBoard();
-myGame.setValue(1,2,"X");
-myGame.printBoard();
-myGame.setValue(0,2,"O");
 myGame.printBoard();
