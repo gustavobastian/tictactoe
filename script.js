@@ -5,7 +5,7 @@ console.log("starting")
 const turnController= function(){
     let players=['X','O']
     let current_turn='X';
-
+    let countMov = 0;
     let setCurrentTurn = function(){
         
         if (this.current_turn==='X'){
@@ -14,7 +14,20 @@ const turnController= function(){
         else{
             this.current_turn='X';
         }
+        this.incCountMov();
+        
         return;
+    }
+
+    let getCountMov= function (){
+        return countMov;
+    }
+
+    let incCountMov= function (){
+         countMov++;
+    }
+    let reinitCountMov = function(){
+        countMov=0;
     }
 
     let getCurrentTurn=function(){
@@ -37,6 +50,7 @@ const turnController= function(){
 
     let resetControl = function(){
         this.current_turn='X';
+        this.reinitCountMov();
     }
 
     return {
@@ -45,7 +59,10 @@ const turnController= function(){
         setCurrentTurn,
         getCurrentTurn,
         printControl,
-        resetControl
+        resetControl,
+        reinitCountMov,
+        getCountMov,
+        incCountMov
     }
 }
 
@@ -70,6 +87,21 @@ const gameboard= function (){
         printBoard();
     }
     
+    let getValue = function(x,y){
+        if((y<0)||(y>2)){return Error;}
+        else{
+            if(y==0){
+                return line1[x];
+            }
+            if(y==1){
+                return line2[x];
+            }
+            if(y==2){
+                return line3[x];
+            }
+        }
+    }
+
     let printBoard= function(){        
         let elementLocal=document.getElementById("container");
         let buttons_values=[];
@@ -114,7 +146,8 @@ const gameboard= function (){
     }
 
     let checkWinner = function(){
-        let winner=" "
+        let winner=" ";
+        let text=" ";
         //checking columns
         if ((line1[0]==line2[0])&&(line2[0]==line3[0]))
             { winner=line1[0];}
@@ -130,12 +163,29 @@ const gameboard= function (){
         else if ((line3[0]==line3[1])&&(line3[2]==line3[1]))
             { winner=line3[2];}  
         
-            if(winner!=" "){
+        else if ((line1[0]==line2[1])&&(line2[1]==line3[2]))
+            { winner=line1[0];}  
+        else if ((line1[2]==line2[1])&&(line2[1]==line3[0]))
+            { winner=line1[2];}      
+        
+
+        if(winner!=" ") 
+        {
+            text="The Winner is "+winner;
+        }
+        console.log(myControl.getCountMov())
+        if(myControl.getCountMov()==8)
+        {
+            text="No more movements, tie!";
+            winner="1";
+        }
+
+        if(winner!=" "){
                 console.log(winner)
                 const winElement=document.createElement("div");
                 const winElementInter=document.createElement("h1");
-                winElementInter.style.cssText='display:flex; flex-direction:row;justify-content=center;text-align:center;color:red !important;';
-                winElementInter.textContent="The Winner is "+winner;
+                winElementInter.style.cssText='display:flex; flex-direction:row;justify-content=center;text-align:center;color:#DDAE !important;';
+                winElementInter.textContent=text;
                 winElement.style.cssText='display:flex; flex-direction:row;justify-content=center;text-align:center;color:red !important;font-size: 58px !important;';
                 winElement.appendChild(winElementInter);
                 let elementLocal=document.getElementById("Winner");
@@ -152,6 +202,7 @@ const gameboard= function (){
         line2,
         line3,
         setValue,
+        getValue,
         printBoard,
         resetBoard,
         checkWinner
@@ -178,48 +229,83 @@ const reset = function(){
  * each control uses this function
  */
 const buttonFun = function(x){
-    
+    let occupied =0;
     let localId=x.srcElement.id;
     let user= myControl.getCurrentTurn();
-    myControl.setCurrentTurn();    
-    if(localId==='button_0')
-    {        
-        myGame.setValue(0,0,user)
+    
+    if(localId==='button_0'){        
+        if(myGame.getValue(0,0)===' ')
+            myGame.setValue(0,0,user)
+        else{               
+                occupied=1;
+            }    
     }
-    if(localId==='button_1')
-    {     
-        myGame.setValue(1,0,user)
+    if(localId==='button_1'){     
+        if(myGame.getValue(1,0)===' ')
+            myGame.setValue(1,0,user)
+        else{               
+                occupied=1;
+            }        
     }
-    if(localId==='button_2')
-    {
-        myGame.setValue(2,0,user)
+    if(localId==='button_2'){        
+        if(myGame.getValue(2,0)===' ')
+            myGame.setValue(2,0,user)
+        else{               
+                occupied=1;
+            }        
     }
-    if(localId==='button_3')
-    {
-        myGame.setValue(0,1,user)
+    if(localId==='button_3'){
+        if(myGame.getValue(0,1)===' ')
+            myGame.setValue(0,1,user)
+        else{               
+                occupied=1;
+            }        
+        
     }
-    if(localId==='button_4')
-    {
-        myGame.setValue(1,1,user)
+    if(localId==='button_4'){        
+        if(myGame.getValue(1,1)===' ')
+            myGame.setValue(1,1,user)
+        else{               
+                occupied=1;
+            }        
     }
-    if(localId==='button_5')
-    {
-        myGame.setValue(2,1,user)
+    if(localId==='button_5'){        
+        if(myGame.getValue(2,1)===' ')
+            myGame.setValue(2,1,user)
+        else{               
+                occupied=1;
+            }        
     }
-    if(localId==='button_6')
-    {
-        myGame.setValue(0,2,user)
+    if(localId==='button_6'){
+        if(myGame.getValue(0,2)===' ')
+            myGame.setValue(0,2,user)
+        else{               
+                occupied=1;
+            }        
     }
-    if(localId==='button_7')
-    {
-        myGame.setValue(1,2,user)
+    if(localId==='button_7'){        
+        if(myGame.getValue(1,2)===' ')
+            myGame.setValue(1,2,user)
+        else{               
+                occupied=1;
+            }       
     }
-    if(localId==='button_8')
-    {
-        myGame.setValue(2,2,user)
+    if(localId==='button_8'){        
+        if(myGame.getValue(2,2)===' ')
+            myGame.setValue(2,2,user)
+        else{               
+                occupied=1;
+            }       
+        
     }
-    myGame.checkWinner();
-    myControl.printControl();
+    if(occupied==0){
+        myGame.checkWinner();
+        myControl.printControl();
+        myControl.setCurrentTurn();    
+    }
+    else{
+        window.alert("occupied box!");
+    }
     return;
 }
 
