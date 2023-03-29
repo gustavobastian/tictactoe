@@ -14,7 +14,7 @@ const turnController= function(){
         else{
             this.current_turn='X';
         }
-        this.incCountMov();
+       
         
         return;
     }
@@ -26,6 +26,10 @@ const turnController= function(){
     let incCountMov= function (){
          countMov++;
     }
+    let decCountMov= function (){
+        countMov=countMov - 1;
+        console.log("here:"+countMov)
+   }
     let reinitCountMov = function(){
         countMov=0;
     }
@@ -62,7 +66,8 @@ const turnController= function(){
         resetControl,
         reinitCountMov,
         getCountMov,
-        incCountMov
+        incCountMov,
+        decCountMov
     }
 }
 
@@ -231,8 +236,9 @@ const reset = function(){
 const buttonFun = function(x){
     let occupied =0;
     let localId=x.srcElement.id;
+      
     let user= myControl.getCurrentTurn();
-    
+    myControl.setCurrentTurn(); 
     if(localId==='button_0'){        
         if(myGame.getValue(0,0)===' ')
             myGame.setValue(0,0,user)
@@ -301,10 +307,13 @@ const buttonFun = function(x){
     if(occupied==0){
         myGame.checkWinner();
         myControl.printControl();
-        myControl.setCurrentTurn();    
+        myControl.incCountMov(); 
     }
     else{
+        
         window.alert("occupied box!");
+        myControl.setCurrentTurn(); 
+        
     }
     return;
 }
