@@ -1,7 +1,5 @@
 console.log("starting")
 
-
-
 const turnController= function(){
     let players=['X','O'] //type of marks
     let current_turn='X'; // inital mark
@@ -14,8 +12,6 @@ const turnController= function(){
         else{
             this.current_turn='X';
         }
-       
-        
         return;
     }
 
