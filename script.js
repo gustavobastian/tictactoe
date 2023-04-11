@@ -187,7 +187,7 @@ const gameboard= function (){
                 const winElementInter=document.createElement("h1");
                 winElementInter.style.cssText='display:flex; flex-direction:row;justify-content=center;text-align:center;color:#DDAE !important;';
                 winElementInter.textContent=text;
-                winElement.style.cssText='display:flex; flex-direction:row;justify-content=center;text-align:center;color:red !important;font-size: 58px !important;';
+                winElement.style.cssText='display:flex; flex-direction:row;justify-content=center;text-align:center;color:red !important;font-size: 30px !important;';
                 winElement.appendChild(winElementInter);
                 let elementLocal=document.getElementById("Winner");
                 elementLocal.appendChild(winElement)

@@ -24,8 +24,8 @@ body{
     height: 200px;
     background: transparent;
     text-align: center;
-    
-    
+    padding-bottom:0%;
+    margin-bottom:0%;
 }
 #rightC{
     display: flex;
@@ -47,18 +47,16 @@ body{
     width: 20%;
     text-align: center;
     align-items: center;
-    
-    
 }
 #textControl{
     display:flex;
     flex-direction: column;
     justify-content: space-around;
-    font-size: 35px;
+    font-size: 25px;
     font-weight: bold;
     width: 100%;
     text-align: center;
-    background: gold;
+    background: transparent;/*gold;*/
     color: black;
     border-radius: 5px;
     margin-bottom: 10px;
@@ -89,6 +87,7 @@ body{
     justify-content: center;
     align-items: center;
     text-align: center;
+    padding-top:0%;
    
 }
 .insideGrid{
